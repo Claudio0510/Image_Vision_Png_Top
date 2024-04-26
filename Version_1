@@ -1,0 +1,78 @@
+import tkinter as tk 
+from tkinter import filedialog
+
+
+#Function to begin to look at the images that somebody wants to putt on the screen 
+def Search_Image():
+    # Open the main file 
+    ruta_archivo = filedialog.askopenfilename()
+    
+    if ruta_archivo:
+        
+        print("Debería de funcionar")
+        
+        # Create the label and show the image
+        image_1_label = tk.PhotoImage(file=ruta_archivo)
+        
+        # Resize the image to fit the label (adjust the numbers as needed)
+        resized_image = image_1_label.subsample(2)  # Adjust the subsample factor
+        
+        #To can work with the label on ev*ery function
+        global label
+        
+        label = tk.Label(Screen, image=resized_image)
+        label.image = resized_image  # Keep a reference to the image
+        label.pack(fill=tk.BOTH, expand=True)
+        
+
+        
+        
+        
+        #Create the button to begin to look the image 
+        Search_Button = tk.Button(Screen , text = "Search Image" , command = Search_Image)
+        Search_Button.place(x= 0 , y = 0)
+
+        #Create the button to remove the image that is being showed 
+        Remove_Button = tk.Button(Screen , text = "Remove Image" , command= Remove_Image )
+        Remove_Button.place(x=100 , y = 0)
+       
+        
+    
+
+    
+def Remove_Image():
+    print("Remove image")
+    
+    label.destroy()
+    
+    
+
+
+
+
+#Create the screen 
+Screen = tk.Tk()
+Screen.title("Visor de imagenes")
+Screen.geometry("500x500")
+
+#Make allways the screen at the top 
+Screen.attributes("-topmost", True)
+
+
+#Create the button to begin to look the image 
+Search_Button = tk.Button(Screen , text = "Search Image" , command = Search_Image)
+Search_Button.place(x= 0 , y = 0)
+
+#Create the button to remove the image that is being showed 
+Remove_Button = tk.Button(Screen , text = "Remove Image" , command= Remove_Image )
+Remove_Button.place(x=100 , y = 0)
+
+
+
+
+
+
+
+
+
+Screen.mainloop()
